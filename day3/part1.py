@@ -1,7 +1,7 @@
 import os
 import re
 
-def evaluate_expression(expression: str) -> int:
+def evaluate_multiplication(expression: str) -> int:
     number_pattern = '[0-9]+'
     matches = re.findall(number_pattern, expression)
     product = 1
@@ -20,6 +20,6 @@ if __name__ == '__main__':
 
     total = 0
     for match in matches:
-        total += evaluate_expression(match)
+        total += evaluate_multiplication(match)
         
     print(f"{total=}")
