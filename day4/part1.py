@@ -21,12 +21,12 @@ def verify_word(data: list[list[str]], word: str, start: tuple[int, int], direct
     return result
     
 
-def find_total_count(data: list[list[str]], word='XMAS') -> int:
+def find_matches(data: list[list[str]], word='XMAS') -> int:
     rows = len(data)
     cols = len(data[0])
     word_length = len(word)
 
-    total = 0
+    matches = list()
     for direction in DIRECTIONS:
         for i in range(rows):
             if (i + direction[1] * (word_length - 1) < 0) or (i + direction[1] * (word_length - 1) > rows - 1):
@@ -35,9 +35,13 @@ def find_total_count(data: list[list[str]], word='XMAS') -> int:
                 if (j + direction[0] * (word_length - 1) < 0) or (j + direction[0] * (word_length - 1) > cols - 1):
                     continue
                 word_found = verify_word(data, word, (j, i), direction)
-                total += word_found
+                if word_found:
+                    matches.append({
+                        'start': (j, i),
+                        'direction': direction
+                    })
 
-    return total
+    return matches
 
 def read_data(input_path: str) -> list[list[str]]:
     data = list()
@@ -49,6 +53,7 @@ def read_data(input_path: str) -> list[list[str]]:
 if __name__ == '__main__':
     input_path = os.path.join('day4', 'input.txt')
     data = read_data(input_path)
-    xmas_count = find_total_count(data, 'XMAS')
+    xmas_matches = find_matches(data, 'XMAS')
+    xmas_count = len(xmas_matches)
 
     print(f'{xmas_count=}')
