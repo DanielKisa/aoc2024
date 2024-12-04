@@ -22,7 +22,6 @@ if __name__ == '__main__':
 
     do_positions.insert(0, 0)
     dont_positions.insert(0, -1)
-    print(multiplication_matches[0].group())
 
     do_positions = np.array(do_positions)
     dont_positions = np.array(dont_positions)
